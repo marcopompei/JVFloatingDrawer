@@ -1,10 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'JVFloatingDrawer', :exclusive => true do
+target 'JVFloatingDrawer' do
 	pod "JVFloatingDrawer", :path => "../"
+    
+    target 'JVFloatingDrawerTests' do
+        inherit! :search_paths
+    end
 end
-
-target 'JVFloatingDrawerTests', :exclusive => true do
-	pod "JVFloatingDrawer", :path => "../"
-end
-
