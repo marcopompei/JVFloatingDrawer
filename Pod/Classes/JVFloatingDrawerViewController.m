@@ -101,6 +101,8 @@ NSString *JVFloatingDrawerSideString(JVFloatingDrawerSide side) {
         [self restoreGestures];
         
         [self.drawerView willCloseFloatingDrawerViewController:self];
+        
+        [self.drawerView.centerViewContainer setNeedsLayout];
     }
 }
 
@@ -151,8 +153,13 @@ NSString *JVFloatingDrawerSideString(JVFloatingDrawerSide side) {
 - (void)setCenterViewController:(UIViewController *)centerViewController {
     [self replaceViewController:self.centerViewController withViewController:centerViewController
                       container:self.drawerView.centerViewContainer];
-    
     _centerViewController = centerViewController;
+
+    if (self.currentlyOpenedSide != JVFloatingDrawerSideNone) {
+        [self addDrawerGestures];
+        [self.drawerView willOpenFloatingDrawerViewController:self];
+    }
+    
 }
 
 - (void)replaceViewController:(UIViewController *)sourceViewController withViewController:(UIViewController *)destinationViewController container:(UIView *)container {
